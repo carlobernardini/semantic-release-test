@@ -55,6 +55,7 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           name: Next expected version ${{ steps.semrel.outputs.nextVersion }}
           conclusion: neutral
+      - run: echo ${{ fromJSON(steps.semrel.outputs) }}
 
   build:
     runs-on: ubuntu-latest
