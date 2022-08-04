@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-        name: Semantic release (dry run)
+      - name: Semantic release (dry run)
         run: npx semantic-release --dry-run --debug
 
   build:
