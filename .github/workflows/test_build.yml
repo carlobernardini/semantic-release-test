@@ -11,7 +11,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Semantic release (dry run)
-        run: npx semantic-release --dry-run --debug
+        run: npx semantic-release --dry-run --debug --branches ${{ github.ref_name }}
 
   build:
     runs-on: ubuntu-latest
