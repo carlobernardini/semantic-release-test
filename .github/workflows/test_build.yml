@@ -12,10 +12,16 @@ jobs:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       NPM_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
-      - run: echo ${{ secrets.GITHUB_TOKEN }}
       - uses: actions/checkout@v3
       - name: Semantic release (dry run)
+        id: semrel
         run: npx semantic-release --dry-run --debug --branches ${{ github.ref_name }}
+      - name: Report version
+        uses: LouisBrunner/checks-action@v1.1.1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          name: Next expected version ${{ steps.semrel.outputs.new_release_version }}
+          conclusion: neutral
 
   build:
     runs-on: ubuntu-latest
