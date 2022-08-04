@@ -11,6 +11,6 @@ module.exports = {
     },
   ],
   plugins: ["@semantic-release/exec", {
-    "verifyReleaseCmd": "echo ::set-output name=nextVersion::${nextRelease.version}"
+    "analyzeCommitsCmd": "echo ::set-output name=nextVersion::${nextRelease.version}"
   }]
 };
