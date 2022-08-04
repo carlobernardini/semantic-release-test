@@ -76,7 +76,12 @@ jobs:
           node-version: ${{ env.node_version }}
           cache: 'npm'
       - name: Debug (build)
-        run: echo "Building..."
+        run: npm run build
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: build
+          path: build
   
   test:
     runs-on: ubuntu-latest
