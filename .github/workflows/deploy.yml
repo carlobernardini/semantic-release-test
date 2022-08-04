@@ -1,0 +1,31 @@
+name: Deploy
+
+on:
+  workflow_run:
+    workflows: ["Build and test"]
+    branches: [main, develop, release]
+    types:
+      - completed
+
+jobs:
+  deploy_storybook:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    steps:
+      - name: Set up Node
+        uses: actions/setup-node@master
+        with:
+          node-version: 18
+      - name: Debug (deploy_storybook)
+        run: echo "Deploy Storybook..."
+
+  deploy_npm:
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    steps:
+      - name: Set up Node
+        uses: actions/setup-node@master
+        with:
+          node-version: 18
+      - name: Debug (deploy_npm)
+        run: echo "Deploy to NPM..."
