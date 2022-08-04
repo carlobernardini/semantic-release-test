@@ -25,10 +25,26 @@ jobs:
   deploy_npm:
     runs-on: ubuntu-latest
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      NPM_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
-      - name: Set up Node
-        uses: actions/setup-node@master
+      - uses: actions/checkout@v3
+      - name: Cache dependencies
+        uses: actions/cache@v3
         with:
-          node-version: ${{ env.node_version }}
-      - name: Debug (deploy_npm)
-        run: echo "Deploy to NPM..."
+          path: node_modules
+          key: ${{ runner.os }}-npm-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-npm-${{ env.cache-name }}-
+            ${{ runner.os }}-npm-
+            ${{ runner.os }}-
+      - name: Download artifacts
+        uses: dawidd6/action-download-artifact@v2
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          workflow: test_build.yml
+          name: build
+
+      - name: Semantic release
+        run: npx semantic-release
