@@ -1,0 +1,12 @@
+name: Build and test
+
+on: [push]
+
+jobs:
+  build:
+    steps:
+      - run: echo "Building..."
+  
+  test:
+    steps:
+      - run: echo "Testing..."
