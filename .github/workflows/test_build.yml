@@ -6,6 +6,13 @@ env:
   node_version: 18
 
 jobs:
+  check_version:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        name: Semantic release (dry run)
+        run: npx semantic-release --dry-run --debug
+
   build:
     runs-on: ubuntu-latest
     steps:
