@@ -10,7 +10,12 @@ module.exports = {
       prerelease: true,
     },
   ],
-  plugins: ["@semantic-release/exec", {
-    "analyzeCommitsCmd": "echo ::set-output name=nextVersion::${nextRelease.version}"
-  }]
+  plugins: [
+    '@semantic-release/npm',
+    '@semantic-release/github',
+    '@semantic-release/commit-analyzer',
+    '@semantic-release/exec', {
+      'verifyReleaseCmd': 'echo ::set-output name=nextVersion::${nextRelease.version}'
+    }
+  ]
 };
