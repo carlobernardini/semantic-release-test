@@ -7,11 +7,13 @@
     "registry": "https://npm.pkg.github.com/"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@semantic-release/exec": "^6.0.3"
+    "@semantic-release/exec": "^6.0.3",
+    "react-scripts": "^5.0.1"
   }
 }
