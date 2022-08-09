@@ -60,7 +60,7 @@ jobs:
           name: Next expected version ${{ steps.semrel.outputs.NEXT_VERSION }}
           conclusion: neutral
           output: |
-            {"summary": "test"}
+            {"summary": "hello", "text_description": "world"}
 
   build:
     runs-on: ubuntu-latest
