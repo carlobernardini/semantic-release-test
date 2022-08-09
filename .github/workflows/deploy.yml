@@ -10,11 +10,9 @@ on:
 env:
   node_version: 18
 
-defaults:
-  runs-on: ubuntu-latest
-
 jobs:
   deploy_storybook:
+    runs-on: ubuntu-latest
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
     steps:
       - name: Set up Node
@@ -25,6 +23,7 @@ jobs:
         run: echo "Deploy Storybook..."
 
   deploy_npm:
+    runs-on: ubuntu-latest
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
     env:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
