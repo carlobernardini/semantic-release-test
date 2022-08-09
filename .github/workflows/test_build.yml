@@ -48,12 +48,16 @@ jobs:
             ${{ runner.os }}-
       - name: Semantic release (dry run)
         id: semrel
-        run: npx semantic-release --dry-run --branches ${{ github.ref_name }} | grep -oP 'next release version is \K[0-9]+\.[0-9]+\.[0-9]+'
+        run: >-
+          echo "::set-output name=NEXT_VERSION::$(
+            npx semantic-release --dry-run --branches ${{ github.ref_name }} |
+            grep -oP 'next release version is \K[0-9]+\.[0-9]+\.[0-9]+'
+          )"
       - name: Report version
         uses: LouisBrunner/checks-action@v1.1.1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          name: Next expected version ${{ steps.semrel.outputs.nextVersion }}
+          name: Next expected version ${{ steps.semrel.outputs.NEXT_VERSION }}
           conclusion: neutral
 
   build:
