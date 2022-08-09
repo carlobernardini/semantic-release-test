@@ -48,7 +48,7 @@ jobs:
             ${{ runner.os }}-
       - name: Semantic release (dry run)
         id: semrel
-        run: npx semantic-release --dry-run --branches ${{ github.ref_name }}
+        run: npx semantic-release --dry-run --branches ${{ github.ref_name }} | grep -oP 'next release version is \K[0-9]+\.[0-9]+\.[0-9]+'
       - name: Report version
         uses: LouisBrunner/checks-action@v1.1.1
         with:
