@@ -14,8 +14,5 @@ module.exports = {
     '@semantic-release/npm',
     '@semantic-release/github',
     '@semantic-release/commit-analyzer',
-    '@semantic-release/exec', {
-      'verifyReleaseCmd': 'echo ::set-output name=nextVersion::${nextRelease.version}'
-    }
   ]
 };

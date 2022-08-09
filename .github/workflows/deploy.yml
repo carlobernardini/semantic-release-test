@@ -47,4 +47,4 @@ jobs:
           name: build
 
       - name: Semantic release
-        run: npx semantic-release
+        run: npx semantic-release@17
